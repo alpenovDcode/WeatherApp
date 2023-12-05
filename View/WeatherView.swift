@@ -17,17 +17,27 @@ struct WeatherView: View {
         NavigationView {
             VStack {
                 TextField("Enter Location", text: $location)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.blue, lineWidth: 2)
+                    )
+
                 
-                Button("Get Weather") {
+                Button {
                     self.weatherData = nil
                     WeatherData.fetchWeather(for: location) { data in
                         self.weatherData = data
                     }
-                    
+                } label: {
+                    Text("Get Weather")
                 }
+                .buttonStyle(BorderlessButtonStyle())
                 .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .clipShape(Capsule())
+                .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
                 
                 if let weatherData = weatherData {
                     WeatherDataView(weatherData: weatherData)
@@ -46,4 +56,3 @@ struct WeatherView: View {
         }
     }
 }
-

@@ -19,6 +19,9 @@ struct WeatherDataView: View {
             Text("Date: \(formatDate(weatherData.date))")
         }
         .padding()
+        .foregroundColor(.white)
+        .background(.blue)
+        .cornerRadius(10)
     }
     
     func formatDate(_ date: Date) -> String {
